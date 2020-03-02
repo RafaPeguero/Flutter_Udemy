@@ -30,6 +30,18 @@
             "icon" : "input",
             "color": "black87",
             "texto": "Inputs"
+        },
+        {
+            "ruta" : "slider",
+            "icon" : "tune",
+            "color": "teal",
+            "texto": "Sliders"
+        },
+        {
+            "ruta" : "list",
+            "icon" : "list",
+            "color": "redAccent",
+            "texto": "Listas y Scroll"
         }
     ]
 }
