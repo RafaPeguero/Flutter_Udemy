@@ -14,7 +14,7 @@ class ScansBloc {
     obtenerScans();
   }
 
-  final _scansController = StreamController<List<ScanModel>>();
+  final _scansController = StreamController<List<ScanModel>>.broadcast();
 
    Stream<List<ScanModel>> get scansStream => _scansController.stream;
 
