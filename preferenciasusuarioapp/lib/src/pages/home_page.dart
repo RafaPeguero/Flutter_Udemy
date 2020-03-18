@@ -9,7 +9,9 @@ class HomePage extends StatelessWidget {
       appBar:  AppBar(
         title: Text('Preferencias de Usuario'),
       ),
+      drawer: _crearMenu(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text('Color secundario:'),
           Divider(),
@@ -17,6 +19,21 @@ class HomePage extends StatelessWidget {
           Divider(),
           Text('Nombre usuario:'),
           Divider(),
+        ],
+      ),
+    );
+  }
+
+  Drawer _crearMenu() {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            child: Container(),
+            decoration: BoxDecoration(
+              image: 
+            ),
+          )
         ],
       ),
     );
