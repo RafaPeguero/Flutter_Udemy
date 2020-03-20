@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:qrreaderapp/src/bloc/scans_bloc.dart';
 import 'package:qrreaderapp/src/models/scan_model.dart';
 import 'package:qrreaderapp/src/pages/direcciones_page.dart';
 import 'package:qrreaderapp/src/pages/mapas_page.dart';
+import 'package:qrreaderapp/src/utils/utils.dart' as utils;
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -30,35 +35,39 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: _scanQR,
+        onPressed: () =>_scanQR(context),
         backgroundColor: Theme.of(context).primaryColor,
 
         ),
     );
   }
 
-   _scanQR() async {
+   _scanQR(BuildContext context) async {
 
      // 
      // geo:40.73255860802501,-73.89333143671877
-
-     String futureString = 'https://fernando-herrera.com';
+// String futureString = 'https://fernando-herrera.com';
+     String futureString;
      
 
-    // try {
-    //   futureString = await BarcodeScanner.scan();
-    // } catch(error) {
-    //   futureString = error.toString();
-    // }
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch(error) {
+      futureString = error.toString();
+    }
 
 
     if(futureString != null) {
-      // Video numero 163 URL_launcher
       final scan = ScanModel(valor: futureString);
       scansBloc.agregarScan(scan);
 
-     final scan2 = ScanModel(valor: 'geo:40.73255860802501,-73.89333143671877');
-      scansBloc.agregarScan(scan2);
+      if (Platform.isIOS) {
+        Future.delayed(Duration(milliseconds: 750), () {
+          utils.abrirScan(context, scan);
+        });
+      } else {
+        utils.abrirScan(context, scan);
+      }
     }
   }
 
